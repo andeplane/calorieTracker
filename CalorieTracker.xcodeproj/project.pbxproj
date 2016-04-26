@@ -25,6 +25,9 @@
 		98658D811CCEA96800DC5BEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98658D801CCEA96800DC5BEE /* Assets.xcassets */; };
 		98658D921CCEA99200DC5BEE /* HKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 98658D911CCEA99200DC5BEE /* HKManager.m */; };
 		98658D941CCEADE500DC5BEE /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98658D931CCEADE500DC5BEE /* HealthKit.framework */; };
+		98658D961CCF37E800DC5BEE /* HKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 98658D911CCEA99200DC5BEE /* HKManager.m */; };
+		98658D9E1CCF537A00DC5BEE /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98658D9D1CCF537A00DC5BEE /* HealthKit.framework */; };
+		98658DA11CCF559D00DC5BEE /* AddFoodInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98658DA01CCF559D00DC5BEE /* AddFoodInterfaceController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +105,10 @@
 		98658D911CCEA99200DC5BEE /* HKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKManager.m; sourceTree = "<group>"; };
 		98658D931CCEADE500DC5BEE /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		98658D951CCEADE500DC5BEE /* CalorieTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CalorieTracker.entitlements; sourceTree = "<group>"; };
+		98658D9C1CCF537A00DC5BEE /* CalorieTracker WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "CalorieTracker WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		98658D9D1CCF537A00DC5BEE /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.2.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		98658D9F1CCF559D00DC5BEE /* AddFoodInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFoodInterfaceController.h; sourceTree = "<group>"; };
+		98658DA01CCF559D00DC5BEE /* AddFoodInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFoodInterfaceController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98658D9E1CCF537A00DC5BEE /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +134,7 @@
 		98658D3B1CCEA96700DC5BEE = {
 			isa = PBXGroup;
 			children = (
+				98658D9D1CCF537A00DC5BEE /* HealthKit.framework */,
 				98658D931CCEADE500DC5BEE /* HealthKit.framework */,
 				98658D461CCEA96700DC5BEE /* CalorieTracker */,
 				98658D5F1CCEA96800DC5BEE /* CalorieTracker WatchKit App */,
@@ -184,6 +193,7 @@
 		98658D6E1CCEA96800DC5BEE /* CalorieTracker WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				98658D9C1CCF537A00DC5BEE /* CalorieTracker WatchKit Extension.entitlements */,
 				98658D711CCEA96800DC5BEE /* InterfaceController.h */,
 				98658D721CCEA96800DC5BEE /* InterfaceController.m */,
 				98658D741CCEA96800DC5BEE /* ExtensionDelegate.h */,
@@ -197,6 +207,8 @@
 				98658D801CCEA96800DC5BEE /* Assets.xcassets */,
 				98658D821CCEA96800DC5BEE /* Info.plist */,
 				98658D6F1CCEA96800DC5BEE /* Supporting Files */,
+				98658D9F1CCF559D00DC5BEE /* AddFoodInterfaceController.h */,
+				98658DA01CCF559D00DC5BEE /* AddFoodInterfaceController.m */,
 			);
 			path = "CalorieTracker WatchKit Extension";
 			sourceTree = "<group>";
@@ -288,6 +300,12 @@
 					};
 					98658D691CCEA96800DC5BEE = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 4XKET6P69R;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -361,6 +379,8 @@
 				98658D731CCEA96800DC5BEE /* InterfaceController.m in Sources */,
 				98658D791CCEA96800DC5BEE /* NotificationController.m in Sources */,
 				98658D7C1CCEA96800DC5BEE /* GlanceController.m in Sources */,
+				98658D961CCF37E800DC5BEE /* HKManager.m in Sources */,
+				98658DA11CCF559D00DC5BEE /* AddFoodInterfaceController.m in Sources */,
 				98658D7F1CCEA96800DC5BEE /* ComplicationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -494,6 +514,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "CalorieTracker WatchKit Extension/CalorieTracker WatchKit Extension.entitlements";
 				INFOPLIST_FILE = "CalorieTracker WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hafreager.CalorieTracker.watchkitapp.watchkitextension;
@@ -509,6 +530,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "CalorieTracker WatchKit Extension/CalorieTracker WatchKit Extension.entitlements";
 				INFOPLIST_FILE = "CalorieTracker WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hafreager.CalorieTracker.watchkitapp.watchkitextension;
@@ -593,6 +615,7 @@
 				98658D871CCEA96800DC5BEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		98658D891CCEA96800DC5BEE /* Build configuration list for PBXNativeTarget "CalorieTracker WatchKit App" */ = {
 			isa = XCConfigurationList;
@@ -601,6 +624,7 @@
 				98658D8B1CCEA96800DC5BEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		98658D8D1CCEA96800DC5BEE /* Build configuration list for PBXNativeTarget "CalorieTracker" */ = {
 			isa = XCConfigurationList;
@@ -609,6 +633,7 @@
 				98658D8F1CCEA96800DC5BEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

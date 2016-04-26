@@ -8,8 +8,9 @@
 
 #import "ViewController.h"
 #import "HKManager.h"
+#import <WatchConnectivity/WatchConnectivity.h>
 
-@interface ViewController ()
+@interface ViewController () <WCSessionDelegate>
 
 @end
 
@@ -22,7 +23,22 @@
     [[HKManager sharedManager] addObserver:self forKeyPath:@"foodEaten" options:NSKeyValueObservingOptionNew context:nil];
     
     self.enableHealth.on = [[HKManager sharedManager] isAuthorized];
-    [self update];
+    [[HKManager sharedManager] update];
+}
+
+- (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message replyHandler:(nonnull void (^)(NSDictionary<NSString *,id> * __nonnull))replyHandler {
+//    NSString *counterValue = [message objectForKey:@"counterValue"];
+    
+//    if (!self.counterData) {
+//        self.counterData = [[NSMutableArray alloc] init];
+//    }
+//    
+//    //Use this to update the UI instantaneously (otherwise, takes a little while)
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        
+//        [self.counterData addObject:counterValue];
+//        [self.mainTableView reloadData];
+//    });
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -61,12 +77,6 @@
 
 - (IBAction)enableHealthChanged:(id)sender {
     [[HKManager sharedManager] requestAuthorization];
-}
-
--(void) update {
-    [[HKManager sharedManager] requestRestingEnergy];
-    [[HKManager sharedManager] requestActiveEnergy];
-    [[HKManager sharedManager] requestFoodEaten];
 }
 
 @end

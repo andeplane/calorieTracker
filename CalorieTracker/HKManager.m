@@ -30,6 +30,12 @@
     return instance;
 }
 
+-(void) update {
+    [self requestRestingEnergy];
+    [self requestActiveEnergy];
+    [self requestFoodEaten];
+}
+
 -(NSArray*) authorizationsNeeded {
     return @[[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBasalEnergyBurned],
              [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned],
@@ -53,6 +59,9 @@
     NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:oneWeekAgo endDate:now options:HKQueryOptionStrictStartDate];
     
     HKStatisticsQuery *query = [[HKStatisticsQuery alloc] initWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBasalEnergyBurned] quantitySamplePredicate:predicate options:HKStatisticsOptionCumulativeSum completionHandler:^(HKStatisticsQuery * _Nonnull query, HKStatistics * _Nullable result, NSError * _Nullable error) {
+        if(error) {
+            NSLog(@"Error in resting energy: %@", error);
+        }
         HKQuantity *quantity = result.sumQuantity;
         double energy = [quantity doubleValueForUnit:[HKUnit kilocalorieUnit]];
         double energyPerDay = energy / 7;
@@ -76,6 +85,9 @@
     NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:todaysDate endDate:now options:HKQueryOptionStrictStartDate];
     
     HKStatisticsQuery *query = [[HKStatisticsQuery alloc] initWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed] quantitySamplePredicate:predicate options:HKStatisticsOptionCumulativeSum completionHandler:^(HKStatisticsQuery * _Nonnull query, HKStatistics * _Nullable result, NSError * _Nullable error) {
+        if(error) {
+            NSLog(@"Error in food eaten: %@", error);
+        }
         HKQuantity *quantity = result.sumQuantity;
         double energy = [quantity doubleValueForUnit:[HKUnit kilocalorieUnit]];
         self.foodEaten = energy;
@@ -98,6 +110,9 @@
     NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:todaysDate endDate:now options:HKQueryOptionStrictStartDate];
     
     HKStatisticsQuery *query = [[HKStatisticsQuery alloc] initWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned] quantitySamplePredicate:predicate options:HKStatisticsOptionCumulativeSum completionHandler:^(HKStatisticsQuery * _Nonnull query, HKStatistics * _Nullable result, NSError * _Nullable error) {
+        if(error) {
+            NSLog(@"Error in active energy: %@", error);
+        }
         HKQuantity *quantity = result.sumQuantity;
         double energy = [quantity doubleValueForUnit:[HKUnit kilocalorieUnit]];
         self.activeEnergy = energy;
@@ -105,6 +120,23 @@
     }];
     
     [self.healthStore executeQuery:query];
+}
+
+- (void) addFoodWithCalories:(NSInteger) calories {
+    // Each quantity consists of a value and a unit.
+    HKQuantity *energyQuantity = [HKQuantity quantityWithUnit:[HKUnit kilocalorieUnit] doubleValue:calories];
+    
+    HKQuantityType *energyConsumedType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
+    NSDate *now = [NSDate date];
+    
+    // For every sample, we need a sample type, quantity and a date.
+    HKQuantitySample *foodSample = [HKQuantitySample quantitySampleWithType:energyConsumedType quantity:energyQuantity startDate:now endDate:now];
+    
+    [self.healthStore saveObject:foodSample withCompletion:^(BOOL success, NSError *error) {
+        if (!success) {
+            NSLog(@"Error while saving weight (%ld) to Health Store: %@.", (long)calories, error);
+        }
+    }];
 }
 
 - (void)requestAuthorization {
