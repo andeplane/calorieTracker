@@ -10,5 +10,6 @@
 #import <Foundation/Foundation.h>
 
 @interface GlanceController : WKInterfaceController
+@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *lblFoodLeft;
 
 @end

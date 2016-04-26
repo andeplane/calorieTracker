@@ -7,6 +7,7 @@
 //
 
 #import "ComplicationController.h"
+#import "HKManager.h"
 
 @interface ComplicationController ()
 
@@ -17,7 +18,7 @@
 #pragma mark - Timeline Configuration
 
 - (void)getSupportedTimeTravelDirectionsForComplication:(CLKComplication *)complication withHandler:(void(^)(CLKComplicationTimeTravelDirections directions))handler {
-    handler(CLKComplicationTimeTravelDirectionForward|CLKComplicationTimeTravelDirectionBackward);
+    handler(CLKComplicationTimeTravelDirectionNone);
 }
 
 - (void)getTimelineStartDateForComplication:(CLKComplication *)complication withHandler:(void(^)(NSDate * __nullable date))handler {
@@ -33,11 +34,21 @@
 }
 
 #pragma mark - Timeline Population
-
 - (void)getCurrentTimelineEntryForComplication:(CLKComplication *)complication withHandler:(void(^)(CLKComplicationTimelineEntry * __nullable))handler {
     // Call the handler with the current timeline entry
-    handler(nil);
+    if(complication.family == CLKComplicationFamilyModularSmall) {
+        CLKComplicationTemplateModularSmallStackText *template = [[CLKComplicationTemplateModularSmallStackText alloc] init];
+        int foodLeft = [[HKManager sharedManager] foodLeft];
+        template.line1TextProvider = [CLKSimpleTextProvider textProviderWithText:[NSString stringWithFormat:@"%d", foodLeft]];
+        template.line2TextProvider = [CLKSimpleTextProvider textProviderWithText:@"kcal"];
+        
+        CLKComplicationTimelineEntry *entry = [[CLKComplicationTimelineEntry alloc] init];
+        entry.date = [NSDate date];
+        entry.complicationTemplate = template;
+        handler(entry);
+    } else handler(nil);
 }
+
 
 - (void)getTimelineEntriesForComplication:(CLKComplication *)complication beforeDate:(NSDate *)date limit:(NSUInteger)limit withHandler:(void(^)(NSArray<CLKComplicationTimelineEntry *> * __nullable entries))handler {
     // Call the handler with the timeline entries prior to the given date
@@ -50,17 +61,20 @@
 }
 
 #pragma mark Update Scheduling
-
 - (void)getNextRequestedUpdateDateWithHandler:(void(^)(NSDate * __nullable updateDate))handler {
     // Call the handler with the date when you would next like to be given the opportunity to update your complication content
-    handler(nil);
+    handler([NSDate dateWithTimeIntervalSinceNow:1200]);
 }
 
 #pragma mark - Placeholder Templates
 
 - (void)getPlaceholderTemplateForComplication:(CLKComplication *)complication withHandler:(void(^)(CLKComplicationTemplate * __nullable complicationTemplate))handler {
-    // This method will be called once per supported complication, and the results will be cached
-    handler(nil);
+    if(complication.family == CLKComplicationFamilyModularSmall) {
+        CLKComplicationTemplateModularSmallStackText *template = [[CLKComplicationTemplateModularSmallStackText alloc] init];
+        template.line1TextProvider = [CLKSimpleTextProvider textProviderWithText:@"A"];
+        template.line2TextProvider = [CLKSimpleTextProvider textProviderWithText:@"B"];
+        handler(template);
+    } else handler(nil);
 }
 
 @end

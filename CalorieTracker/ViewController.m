@@ -64,9 +64,8 @@
         });
     }
     
-    int foodLeft = (int) (([HKManager sharedManager].activeEnergy + [HKManager sharedManager].restingEnergy) - [HKManager sharedManager].foodEaten);
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.lblFoodLeft.text = [NSString stringWithFormat:@"%d", foodLeft];
+        self.lblFoodLeft.text = [NSString stringWithFormat:@"%d", [[HKManager sharedManager] foodLeft]];
     });
 }
 

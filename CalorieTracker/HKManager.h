@@ -22,5 +22,6 @@
 - (void) addFoodWithCalories:(NSInteger) calories;
 - (NSArray*) authorizationsNeeded;
 - (bool) isAuthorized;
+- (int) foodLeft;
 
 @end

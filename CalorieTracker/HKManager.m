@@ -139,6 +139,10 @@
     }];
 }
 
+-(int) foodLeft {
+    return self.activeEnergy + self.restingEnergy - self.foodEaten;
+}
+
 - (void)requestAuthorization {
     
     if ([HKHealthStore isHealthDataAvailable] == NO) {

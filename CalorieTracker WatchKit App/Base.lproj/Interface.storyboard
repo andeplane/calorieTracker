@@ -14,18 +14,19 @@
                         <label alignment="left" text="Total energy: 0" id="dsT-Jk-leX"/>
                         <label alignment="left" text="Food eaten: 0" id="XB7-e9-ALL"/>
                         <label alignment="left" text="Food left: 0" id="Xun-6A-F8B"/>
-                        <button width="1" alignment="left" title="Add food" id="idU-iZ-4at">
+                        <button width="1" alignment="left" title="I ate 0 kCals" id="idU-iZ-4at">
                             <connections>
-                                <segue destination="Aeb-8G-gac" kind="push" id="IrE-zv-Oqy"/>
+                                <action selector="addFoodClicked" destination="AgC-eL-Hgc" id="pVa-Rb-bog"/>
                             </connections>
                         </button>
-                        <picker height="1" alignment="left" id="b18-Oj-RqG">
+                        <picker height="0.0" alignment="left" id="b18-Oj-RqG">
                             <connections>
-                                <action selector="pickerChanged:" destination="Aeb-8G-gac" id="Qfh-Z1-kAb"/>
+                                <action selector="pickerChanged:" destination="AgC-eL-Hgc" id="EjC-4Y-u1G"/>
                             </connections>
                         </picker>
                     </items>
                     <connections>
+                        <outlet property="btnAdd" destination="idU-iZ-4at" id="IlT-a1-jHx"/>
                         <outlet property="lblActiveEnergy" destination="b86-1y-cW7" id="LEO-fT-BgX"/>
                         <outlet property="lblFoodEaten" destination="XB7-e9-ALL" id="eJQ-C3-6Zt"/>
                         <outlet property="lblFoodLeft" destination="Xun-6A-F8B" id="mt2-DJ-Tvw"/>
@@ -36,31 +37,6 @@
             </objects>
             <point key="canvasLocation" x="235" y="347"/>
         </scene>
-        <!--Add Food Interface Controller-->
-        <scene sceneID="hW8-hD-coa">
-            <objects>
-                <controller id="Aeb-8G-gac" customClass="AddFoodInterfaceController">
-                    <items>
-                        <label width="136" alignment="left" text="200 kCal" id="POX-pK-SfW"/>
-                        <button width="1" alignment="left" title="Add" id="DyX-3o-QLk">
-                            <connections>
-                                <action selector="addClicked" destination="Aeb-8G-gac" id="Ps7-6f-L6R"/>
-                            </connections>
-                        </button>
-                        <picker height="0.0" alignment="left" id="wX4-CK-Zbb">
-                            <connections>
-                                <action selector="pickerChanged:" destination="Aeb-8G-gac" id="jmL-L2-NrJ"/>
-                            </connections>
-                        </picker>
-                    </items>
-                    <connections>
-                        <outlet property="lblCalories" destination="POX-pK-SfW" id="KI8-8n-aZi"/>
-                        <outlet property="picker" destination="wX4-CK-Zbb" id="NAc-JQ-QQR"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="471" y="324.5"/>
-        </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
             <objects>
@@ -68,16 +44,15 @@
                     <items>
                         <group alignment="left" id="t8f-Gd-c4y">
                             <items>
-                                <label alignment="left" text="0 calories left" id="Di6-jf-58A"/>
+                                <label alignment="left" text="Food left: 0" id="Phx-92-Z5W"/>
                             </items>
                         </group>
-                        <group alignment="left" id="uCw-4Q-Ouw">
-                            <items>
-                                <button width="1" alignment="left" title="Button" id="mqP-c1-z3M"/>
-                            </items>
-                        </group>
+                        <group alignment="left" id="uCw-4Q-Ouw"/>
                     </items>
                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
+                    <connections>
+                        <outlet property="lblFoodLeft" destination="Phx-92-Z5W" id="LAq-vg-0cd"/>
+                    </connections>
                 </glanceController>
             </objects>
             <point key="canvasLocation" x="235" y="672"/>
