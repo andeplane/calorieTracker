@@ -24,6 +24,7 @@
     
     self.enableHealth.on = [[HKManager sharedManager] isAuthorized];
     [[HKManager sharedManager] update];
+    
 }
 
 - (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message replyHandler:(nonnull void (^)(NSDictionary<NSString *,id> * __nonnull))replyHandler {

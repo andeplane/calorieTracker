@@ -26,6 +26,11 @@
     [[HKManager sharedManager] addObserver:self forKeyPath:@"activeEnergy" options:NSKeyValueObservingOptionNew context:nil];
     [[HKManager sharedManager] addObserver:self forKeyPath:@"foodEaten" options:NSKeyValueObservingOptionNew context:nil];
     [[HKManager sharedManager] requestAuthorization];
+    
+    self.didAddCalories = false;
+    [[HKManager sharedManager] update];
+    [self createPickerItems];
+    [self.picker focus];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -70,10 +75,6 @@
 - (void)willActivate {
     // This method is called when watch view controller is about to be visible to user
     [super willActivate];
-    self.didAddCalories = false;
-    [[HKManager sharedManager] update];
-    [self createPickerItems];
-    [self.picker focus];
 }
 
 - (void)didDeactivate {

@@ -22,16 +22,15 @@
     [[HKManager sharedManager] addObserver:self forKeyPath:@"restingEnergy" options:NSKeyValueObservingOptionNew context:nil];
     [[HKManager sharedManager] addObserver:self forKeyPath:@"activeEnergy" options:NSKeyValueObservingOptionNew context:nil];
     [[HKManager sharedManager] addObserver:self forKeyPath:@"foodEaten" options:NSKeyValueObservingOptionNew context:nil];
+    [[HKManager sharedManager] requestAuthorization];
     
     // Configure interface objects here.
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    int foodLeft = (int) (([HKManager sharedManager].activeEnergy + [HKManager sharedManager].restingEnergy) - [HKManager sharedManager].foodEaten);
-    NSLog(@"Glance: Food left: %d", foodLeft);
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.lblFoodLeft.text = [NSString stringWithFormat:@"Food left: %d", foodLeft];
+        self.lblFoodLeft.text = [NSString stringWithFormat:@"Food left: %d", [[HKManager sharedManager] foodLeft]];
     });
 }
 

@@ -63,7 +63,21 @@
 #pragma mark Update Scheduling
 - (void)getNextRequestedUpdateDateWithHandler:(void(^)(NSDate * __nullable updateDate))handler {
     // Call the handler with the date when you would next like to be given the opportunity to update your complication content
-    handler([NSDate dateWithTimeIntervalSinceNow:1200]);
+    if(self.firstLoad == true) {
+        handler([NSDate dateWithTimeIntervalSinceNow:10]);
+        self.firstLoad = false;
+    } else {
+        handler([NSDate dateWithTimeIntervalSinceNow:900]);
+    }
+    
+}
+
+- (void)requestedUpdateDidBegin {
+    NSLog(@"Update did begin");
+}
+
+- (void)requestedUpdateBudgetExhausted {
+    NSLog(@"Update is exausted...");
 }
 
 #pragma mark - Placeholder Templates
