@@ -19,6 +19,7 @@
 - (void) requestFoodEaten;
 - (void) requestAuthorization;
 - (void) update;
+- (int) totalEnergy;
 - (void) addFoodWithCalories:(NSInteger) calories;
 - (NSArray*) authorizationsNeeded;
 - (bool) isAuthorized;

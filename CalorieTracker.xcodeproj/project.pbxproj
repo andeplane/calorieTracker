@@ -28,6 +28,7 @@
 		98658D961CCF37E800DC5BEE /* HKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 98658D911CCEA99200DC5BEE /* HKManager.m */; };
 		98658D9E1CCF537A00DC5BEE /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98658D9D1CCF537A00DC5BEE /* HealthKit.framework */; };
 		98658DA11CCF559D00DC5BEE /* AddFoodInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98658DA01CCF559D00DC5BEE /* AddFoodInterfaceController.m */; };
+		9897B78F1CD787BB002230BD /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9897B78E1CD787BB002230BD /* images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		98658D9D1CCF537A00DC5BEE /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.2.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		98658D9F1CCF559D00DC5BEE /* AddFoodInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFoodInterfaceController.h; sourceTree = "<group>"; };
 		98658DA01CCF559D00DC5BEE /* AddFoodInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFoodInterfaceController.m; sourceTree = "<group>"; };
+		9897B78E1CD787BB002230BD /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 				98658D6F1CCEA96800DC5BEE /* Supporting Files */,
 				98658D9F1CCF559D00DC5BEE /* AddFoodInterfaceController.h */,
 				98658DA01CCF559D00DC5BEE /* AddFoodInterfaceController.m */,
+				9897B78E1CD787BB002230BD /* images.xcassets */,
 			);
 			path = "CalorieTracker WatchKit Extension";
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98658D811CCEA96800DC5BEE /* Assets.xcassets in Resources */,
+				9897B78F1CD787BB002230BD /* images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

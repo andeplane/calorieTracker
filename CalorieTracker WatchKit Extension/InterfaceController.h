@@ -12,12 +12,11 @@
 @interface InterfaceController : WKInterfaceController
 @property(nonatomic) NSInteger calories;
 @property(nonatomic) bool didAddCalories;
-@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *lblActiveEnergy;
-@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *lblTotalEnergy;
-@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *lblFoodEaten;
-@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *lblFoodLeft;
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfacePicker *picker;
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceButton *btnAdd;
+@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceImage *imgProgress;
+@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceGroup *caloriesLeftIcon;
+@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *lblCaloriesLeft;
 - (IBAction)pickerChanged:(NSInteger)value;
 - (IBAction)addFoodClicked;
 

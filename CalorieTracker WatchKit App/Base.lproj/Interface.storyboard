@@ -10,11 +10,16 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController">
                     <items>
-                        <label alignment="left" text="Active energy: 0" id="b86-1y-cW7"/>
-                        <label alignment="left" text="Total energy: 0" id="dsT-Jk-leX"/>
-                        <label alignment="left" text="Food eaten: 0" id="XB7-e9-ALL"/>
-                        <label alignment="left" text="Food left: 0" id="Xun-6A-F8B"/>
-                        <button width="1" alignment="left" title="I ate 0 kCals" id="idU-iZ-4at">
+                        <group width="120" height="120" alignment="center" backgroundImage="circle0" layout="vertical" id="8bE-cI-8h5">
+                            <items>
+                                <label alignment="center" verticalAlignment="center" text="0" textAlignment="center" id="SMT-i7-3I5">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                                <label alignment="center" verticalAlignment="center" text="kcal left" id="tib-Ip-YBs"/>
+                            </items>
+                        </group>
+                        <button width="1" alignment="left" title="add 0 kcals" id="idU-iZ-4at">
                             <connections>
                                 <action selector="addFoodClicked" destination="AgC-eL-Hgc" id="pVa-Rb-bog"/>
                             </connections>
@@ -27,10 +32,8 @@
                     </items>
                     <connections>
                         <outlet property="btnAdd" destination="idU-iZ-4at" id="IlT-a1-jHx"/>
-                        <outlet property="lblActiveEnergy" destination="b86-1y-cW7" id="LEO-fT-BgX"/>
-                        <outlet property="lblFoodEaten" destination="XB7-e9-ALL" id="eJQ-C3-6Zt"/>
-                        <outlet property="lblFoodLeft" destination="Xun-6A-F8B" id="mt2-DJ-Tvw"/>
-                        <outlet property="lblTotalEnergy" destination="dsT-Jk-leX" id="lr2-fW-7V8"/>
+                        <outlet property="caloriesLeftIcon" destination="8bE-cI-8h5" id="l6V-bq-RK5"/>
+                        <outlet property="lblCaloriesLeft" destination="SMT-i7-3I5" id="xzd-oJ-t02"/>
                         <outlet property="picker" destination="b18-Oj-RqG" id="Whs-sv-ict"/>
                     </connections>
                 </controller>

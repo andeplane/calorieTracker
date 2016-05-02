@@ -35,31 +35,19 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if([keyPath isEqualToString:@"restingEnergy"]) {
-        int value = round([[change valueForKey:@"new"] floatValue]);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            float totalEnergy = [HKManager sharedManager].activeEnergy + value;
-            
-            self.lblTotalEnergy.text = [NSString stringWithFormat:@"Total energy: %d", (int) totalEnergy];
-        });
-    }
-    
-    if([keyPath isEqualToString:@"activeEnergy"]) {
-        int value = round([[change valueForKey:@"new"] floatValue]);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.lblActiveEnergy.text = [NSString stringWithFormat:@"Active energy: %d", value];
-        });
-    }
-    
-    if([keyPath isEqualToString:@"foodEaten"]) {
-        int value = round([[change valueForKey:@"new"] floatValue]);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.lblFoodEaten.text = [NSString stringWithFormat:@"Food eaten: %d", value];
-        });
-    }
-    
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.lblFoodLeft.text = [NSString stringWithFormat:@"Food left: %d", [[HKManager sharedManager] foodLeft]];
+        int totalEnergy = [[HKManager sharedManager] totalEnergy];
+        totalEnergy += 3000;
+        int foodLeft = [[HKManager sharedManager] foodLeft];
+        foodLeft += 1000;
+        int progress = 100*( (totalEnergy-foodLeft) / (float)totalEnergy);
+        progress = MIN(progress, 100);
+        progress = MAX(progress, 0);
+        NSLog(@"Progress: %d", progress);
+        
+        [self.caloriesLeftIcon setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"circle%d", progress]]];
+
+        self.lblCaloriesLeft.text = [NSString stringWithFormat:@"%d", foodLeft];
     });
 }
 
@@ -75,6 +63,7 @@
 - (void)willActivate {
     // This method is called when watch view controller is about to be visible to user
     [super willActivate];
+    [self.picker focus];
 }
 
 - (void)didDeactivate {
@@ -90,7 +79,7 @@
 - (IBAction)pickerChanged:(NSInteger)value {
     NSLog(@"Picker changed value: %d", value);
     self.calories = 10*value;
-    self.btnAdd.title = [NSString stringWithFormat:@"I ate %d kCal", self.calories];
+    self.btnAdd.title = [NSString stringWithFormat:@"add %d kcal", self.calories];
 }
 - (IBAction)addFoodClicked {
     if(self.calories > 0) {

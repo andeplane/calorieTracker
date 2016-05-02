@@ -139,6 +139,10 @@
     }];
 }
 
+-(int) totalEnergy {
+    return self.activeEnergy + self.restingEnergy;
+}
+
 -(int) foodLeft {
     return self.activeEnergy + self.restingEnergy - self.foodEaten;
 }
